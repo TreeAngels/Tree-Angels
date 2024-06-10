@@ -2,23 +2,15 @@
 CREATE TABLE IF NOT EXISTS Login (
     username VARCHAR(45) PRIMARY KEY,
     hash VARCHAR(255) NOT NULL,
-    privilidge VARCHAR(50) NOT NULL CHECK (privilidge IN ('admin', 'organization', 'donor'))
+privilege VARCHAR(50) NOT NULL CHECK (privilege IN ('admin', 'organization', 'donor'))
 );
 
 CREATE TABLE IF NOT EXISTS Donor (
+    username VARCHAR(45) PRIMARY KEY,
     donorID INTEGER AUTO_INCREMENT PRIMARY KEY,
     firstName VARCHAR(50) NOT NULL,
     lastName VARCHAR(50) NOT NULL,
     email VARCHAR(100) NOT NULL,
-    FOREIGN KEY (username) REFERENCES Login(username)
-        ON UPDATE CASCADE
-        ON DELETE CASCADE
-);
-
-CREATE TABLE IF NOT EXISTS Admin (
-    adminID INTEGER AUTO_INCREMENT PRIMARY KEY,
-    firstName VARCHAR(50) NOT NULL,
-    lastName VARCHAR(50) NOT NULL,
     FOREIGN KEY (username) REFERENCES Login(username)
         ON UPDATE CASCADE
         ON DELETE CASCADE
@@ -54,9 +46,10 @@ CREATE TABLE IF NOT EXISTS Household (
 );
 
 CREATE TABLE IF NOT EXISTS Organization (
-     orgID INTEGER AUTO_INCREMENT PRIMARY KEY,
-     orgName VARCHAR (200) NOT NULL,
-     address VARCHAR (300) NOT NULL,
+    username VARCHAR(45) PRIMARY KEY,
+    orgID INTEGER AUTO_INCREMENT PRIMARY KEY,
+    orgName VARCHAR (200) NOT NULL,
+    address VARCHAR (300) NOT NULL,
     FOREIGN KEY (username) REFERENCES Login(username)
         ON UPDATE CASCADE
         ON DELETE CASCADE
@@ -110,4 +103,6 @@ CREATE TABLE IF NOT EXISTS Donee (
         ON DELETE CASCADE
 );
 
-INSERT INTO Login (username, hash, privilidge) VALUES ('admin', 'admin', 'admin');
+-- INSERT INTO Login (username, hash, privilidge) VALUES ('Logan', 'scrypt:32768:8:1$khfz1gL0pVReBaIE$2f526838be140c82900602b9a61781a0bcaa8be90c87e8e7d5e7356b83ca2d427ff143749dc1f06826b308ac40056f1aaf4400e544f540cb873ece8eab737b64', 'admin');
+-- INSERT INTO Login (username, hash, privilidge) VALUES ('Jacob', 'scrypt:32768:8:1$khfz1gL0pVReBaIE$2f526838be140c82900602b9a61781a0bcaa8be90c87e8e7d5e7356b83ca2d427ff143749dc1f06826b308ac40056f1aaf4400e544f540cb873ece8eab737b64', 'admin');
+-- INSERT INTO Login (username, hash, privilidge) VALUES ('Vikyat', 'scrypt:32768:8:1$khfz1gL0pVReBaIE$2f526838be140c82900602b9a61781a0bcaa8be90c87e8e7d5e7356b83ca2d427ff143749dc1f06826b308ac40056f1aaf4400e544f540cb873ece8eab737b64', 'admin');

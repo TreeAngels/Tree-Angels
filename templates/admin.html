@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Admin
+{% endblock %}
+
+{% block main %}
+    <h1>Welcome to the Restricted Admin Page</h1>
+    {% if admin_logged_in %}
+        <h2>You are an admin</h2>
+    {% else %}
+        <h2>Only Admins can see this page</h2>
+    {% endif %}
+{% endblock %}
